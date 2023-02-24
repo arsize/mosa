@@ -1,4 +1,4 @@
-# memo
+# mosa
 
 用于命令行的交互式备忘单工具.🪵
 
@@ -12,7 +12,7 @@ npm install mem -g
 
 - mem config set path="/Usr/doc" 配置文档存放目录
 - mem config get path 展示当前文档目录
-- mem config set git="git@github.com:arsize/memo.git" 配置 git 远端地址
+- mem config set git="git@github.com:arsize/mosa.git" 配置 git 远端地址
 - mem ls 展示文档列表
 - mem ls -t 根据新建时间排序展示文档列表
 - mem cat 10 选择 id 为 10 的文档，执行 cat 命令显示

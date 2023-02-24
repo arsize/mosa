@@ -1,0 +1,45 @@
+{
+  "name": "mosa",
+  "version": "1.0.1",
+  "description": "用于命令行的交互式备忘单工具.🪵",
+  "main": "index.js",
+  "bin": {
+    "mosa": "./bin/mosa.js"
+  },
+  "scripts": {
+    "start": "nodemon",
+    "build": "ts-node-esm",
+    "lint": "eslint ./src --ext .ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arsize/mosa.git"
+  },
+  "keywords": [],
+  "author": "Arsize",
+  "license": "(ISC) MIT",
+  "bugs": {
+    "url": "https://github.com/arsize/mosa/issues"
+  },
+  "homepage": "https://github.com/arsize/mosa#readme",
+  "devDependencies": {
+    "@types/inquirer": "^9.0.3",
+    "@types/node": "^18.14.0",
+    "@types/shelljs": "^0.8.11",
+    "@typescript-eslint/eslint-plugin": "^5.53.0",
+    "@typescript-eslint/parser": "^5.53.0",
+    "chalk": "4.0",
+    "esbuild-node-tsc": "^2.0.5",
+    "eslint": "^8.34.0",
+    "format-json": "^1.0.3",
+    "nodemon": "^2.0.20",
+    "ora": "^6.1.2",
+    "shelljs": "^0.8.5"
+  },
+  "dependencies": {
+    "commander": "^10.0.0",
+    "inquirer": "^8.2.3",
+    "typescript": "^4.9.5"
+  }
+}
