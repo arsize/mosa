@@ -2,7 +2,7 @@ import chalk from "chalk"
 import path from "path"
 import * as configJson from "./mconfig.json"
 import { WriteWay } from "./constant"
-import { checkPathExists, sPrint, writeTo } from "./utils"
+import { checkPathExists, echo, writeTo } from "./utils"
 
 enum Methods {
   SET = "set",
@@ -13,24 +13,25 @@ export const config = (args: string[]) => {
   let m = args[0]
 
   if (!(Object.values(Methods) as string[]).includes(m)) {
-    sPrint(`${chalk.redBright("请输入正确的配置项")}`)
-    sPrint(`${chalk.grey("eg:")}`)
-    sPrint(`${chalk.grey("config set path='/usr'")}`)
-    sPrint(`${chalk.grey("config get path")}`)
+    echo(`${chalk.redBright("请输入正确的配置项")}`)
+    echo(`${chalk.grey("eg:")}`)
+    echo(`${chalk.grey("config set path='/usr'")}`)
+    echo(`${chalk.grey("config get path")}`)
     return
   }
 
   switch (m) {
     case Methods.GET:
       if (args.length > 1 && args[1].includes("path")) {
-        sPrint(`cache path: ${chalk.green(configJson.dir_path)}`)
+        echo(`文档存放路径: ${chalk.green(configJson.dir_path)}`)
+        echo(chalk.grey("查询所有文档：mosa list"))
       }
       break
     case Methods.SET:
       if (args.length > 1 && args[1].includes("path=")) {
         let pa = args[1].split("path=")[1]
         if (!checkPathExists(pa)) {
-          sPrint(`${chalk.redBright("路径不正确，请确认")}`)
+          echo(`${chalk.redBright("路径不正确，请确认")}`)
           return
         }
         try {
@@ -39,6 +40,11 @@ export const config = (args: string[]) => {
             pa,
             WriteWay.FIELD,
             "dir_path"
+          )
+          echo(
+            chalk.grey(
+              "tip:如果你想知道文档存放路径，可以执行mosa config get path"
+            )
           )
         } catch (error) {
           console.log(error)

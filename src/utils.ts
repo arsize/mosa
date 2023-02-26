@@ -2,11 +2,17 @@ import chalk from "chalk"
 import fs from "fs"
 import { WriteWay } from "./constant"
 import json from "format-json"
+import * as configJson from "./mconfig.json"
 
-export const sPrint = (str: string) => {
+export const echo = (str: string) => {
   console.log(str)
 }
 
+/**
+ * 是否为数字
+ * @param str
+ * @returns
+ */
 export const isId = (str: string) => (/^[0-9]*$/.test(str) ? true : false)
 
 /**
@@ -58,6 +64,22 @@ export const writeTo = (
     let _temp: Config = JSON.parse(fs.readFileSync(_pth).toString())
     _temp[field] = content
     fs.writeFileSync(_pth, json.plain(_temp), "utf8")
-    sPrint("success!")
+    echo(chalk.green("ooooook！"))
+  }
+}
+
+/**
+ * 是否已设置归档目录
+ * @returns
+ */
+export function hasDocPath(): boolean {
+  if (!configJson.dir_path) {
+    echo(chalk.redBright("未设置归档路径（统一存放目录）"))
+    echo(chalk.grey("请先运行：mosa config set path=`自定义目录路径`"))
+    echo(chalk.grey("eg：mosa config set path=/Users/doc"))
+
+    return false
+  } else {
+    return true
   }
 }

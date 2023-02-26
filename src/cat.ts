@@ -1,6 +1,6 @@
 import chalk from "chalk"
 import * as configJson from "./mconfig.json"
-import { getFiles, isId, sPrint } from "./utils"
+import { getFiles, isId, echo, hasDocPath } from "./utils"
 import fs from "fs"
 
 /**
@@ -9,28 +9,31 @@ import fs from "fs"
  * @returns
  */
 export const cat = (tag: string) => {
+  if (!hasDocPath()) {
+    return
+  }
   if (isId(tag)) {
     // 通过序列号获取文档内容
     let files = getFiles(configJson.dir_path)
     let fileName = files[parseInt(tag)]
     if (!fileName) {
-      sPrint(`${chalk.redBright("找不到该对应序号的文件，请检查")}`)
+      echo(`${chalk.redBright("找不到该对应序号的文件，请检查")}`)
       return
     }
     let content = fs.readFileSync(configJson.dir_path + "/" + fileName)
-    sPrint("---------------")
-    sPrint(content.toString() || "no content")
-    sPrint("---------------")
+    echo("---------------")
+    echo(content.toString() || "no content")
+    echo("---------------")
   } else {
     // 通过名称获取文档内容
     let fileName = tag
     try {
       let content = fs.readFileSync(configJson.dir_path + "/" + fileName)
-      sPrint("---------------")
-      sPrint(content?.toString())
-      sPrint("---------------")
+      echo("---------------")
+      echo(content?.toString())
+      echo("---------------")
     } catch (error) {
-      sPrint(`${chalk.redBright("找不到该对应名称的文件，请检查")}`)
+      echo(`${chalk.redBright("找不到该对应名称的文件，请检查")}`)
     }
   }
 }

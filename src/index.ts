@@ -4,6 +4,9 @@ import { cat } from "./cat"
 import { del } from "./del"
 import { config } from "./config"
 import inquirer from "inquirer"
+import { touch } from "./touch"
+import { hasDocPath } from "./utils"
+import { openFile } from "./open"
 
 program
   .command("list")
@@ -21,7 +24,7 @@ program
 program
   .command("config")
   .argument("<args...>")
-  .description("get|set path配置存放目录")
+  .description("get|set|open")
   .action((args?: string[]) => {
     if (args) config(args)
   })
@@ -29,8 +32,13 @@ program
 program
   .command("del")
   .alias("d")
+  .argument("<tag>", "文档编号")
   .description("删除文档")
   .action(async (index: string) => {
+    if (!hasDocPath()) {
+      return
+    }
+
     let ans = await inquirer.prompt([
       {
         type: "confirm",
@@ -40,6 +48,24 @@ program
       },
     ])
     ans ? del(index) : null
+  })
+
+program
+  .command("touch")
+  .alias("t")
+  .argument("<name>", "文档名称")
+  .description("新建文档")
+  .action((name) => {
+    touch(name)
+  })
+
+program
+  .command("open")
+  .alias("o")
+  .argument("<name>", "文档名称")
+  .description("打开文档")
+  .action((name) => {
+    openFile(name)
   })
 
 program.parse(process.argv)
