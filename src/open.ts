@@ -11,7 +11,10 @@ import { WriteWay } from "./constant"
 export function openFile(name: string) {
   let _open = configJson.open
   let _path = configJson.dir_path
-  let fileName = name.indexOf(".") ? name : `${name}.md`
+
+  let fileName = name.indexOf(".") != -1 ? name : `${name}.md`
+
+  console.log(fileName)
   if (_open) {
     switch (_open) {
       case "vscode":
