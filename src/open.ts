@@ -11,10 +11,11 @@ import { WriteWay } from "./constant"
 export function openFile(name: string) {
   let _open = configJson.open
   let _path = configJson.dir_path
+  let fileName = name.indexOf(".") ? name : `${name}.md`
   if (_open) {
     switch (_open) {
       case "vscode":
-        shell.exec(`code ${path.join(_path, `/${name}`)}`)
+        shell.exec(`code ${path.join(_path, `/${fileName}`)}`)
         break
 
       default:
@@ -28,7 +29,7 @@ export function openFile(name: string) {
         WriteWay.FIELD,
         "open"
       )
-      shell.exec(`code ${path.join(_path, `/${name}`)}`)
+      shell.exec(`code ${path.join(_path, `/${fileName}`)}`)
     }
   }
 }
