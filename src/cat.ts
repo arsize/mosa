@@ -22,11 +22,14 @@ export const cat = (tag: string) => {
     }
     let content = fs.readFileSync(configJson.dir_path + "/" + fileName)
     echo("---------------")
-    echo(content.toString() || "no content")
+    content.toString() == "" ? echo("no content") : echo(content.toString())
     echo("---------------")
   } else {
     // 通过名称获取文档内容
     let fileName = tag
+    if (tag.indexOf(".") == -1) {
+      fileName = tag + ".md"
+    }
     try {
       let content = fs.readFileSync(configJson.dir_path + "/" + fileName)
       echo("---------------")
