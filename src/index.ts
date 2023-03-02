@@ -9,7 +9,7 @@ import { hasDocLibraryPath } from "./utils"
 import { openFile } from "./open"
 import { updateCache } from "./cache"
 
-program.version("1.0.12", "-v, --version")
+program.version("1.0.13", "-v, --version")
 
 program
   .command("list")

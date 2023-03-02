@@ -10,7 +10,6 @@ enum Methods {
 }
 
 export const config = (args: string[]) => {
-  console.log("config")
   let m = args[0]
 
   if (!(Object.values(Methods) as string[]).includes(m)) {

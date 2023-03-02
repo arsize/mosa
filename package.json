@@ -1,6 +1,6 @@
 {
   "name": "mosa",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "用于命令行的交互式备忘单工具.🪵",
   "main": "index.js",
   "bin": {
