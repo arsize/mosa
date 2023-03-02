@@ -1,24 +1,51 @@
 import * as configJson from "./mconfig.json"
 import shell from "shelljs"
 import path from "path"
-import { writeTo } from "./utils"
+import { getFiles, isId, writeTo, echo, fuzzyMatch } from "./utils"
 import { WriteWay } from "./constant"
+import chalk from "chalk"
 
 /**
  * 打开文档
- * @param name
+ * @param tag
  */
-export function openFile(name: string) {
-  let _open = configJson.open
-  let _path = configJson.dir_path
+export function openFile(tag: string) {
+  let { open, files } = configJson as Config
 
-  let fileName = name.indexOf(".") != -1 ? name : `${name}.md`
+  if (isId(tag)) {
+    let index = parseInt(tag)
+    if (index >= files.length) {
+      echo(chalk.redBright("请输入正确的文件编号"))
+      return
+    }
+    let _pth = files[index].path
+    _openWay(open, _pth)
+  } else {
+    let iArr: number[]
+    iArr = fuzzyMatch(files, tag)
 
-  console.log(fileName)
-  if (_open) {
-    switch (_open) {
+    if (iArr.length == 0) {
+      echo(chalk.redBright("找不到该文件，请确认"))
+      return
+    }
+    if (iArr.length == 1) {
+      let _pth = files[iArr[0]].path
+      _openWay(open, _pth)
+      return
+    }
+    if (iArr.length > 1) {
+      iArr.map((k) => {
+        echo(`${chalk.gray(`[${k}]`)} ${chalk.green(files[k].name)}`)
+      })
+    }
+  }
+}
+
+function _openWay(open: string, _pth: string) {
+  if (open) {
+    switch (open) {
       case "vscode":
-        shell.exec(`code ${path.join(_path, `/${fileName}`)}`)
+        shell.exec(`code ${path.join(_pth)}`)
         break
 
       default:
@@ -32,7 +59,9 @@ export function openFile(name: string) {
         WriteWay.FIELD,
         "open"
       )
-      shell.exec(`code ${path.join(_path, `/${fileName}`)}`)
+      shell.exec(`code ${path.join(_pth)}`)
     }
   }
+
+  echo(chalk.green("oooook!"))
 }

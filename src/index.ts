@@ -5,8 +5,11 @@ import { del } from "./del"
 import { config } from "./config"
 import inquirer from "inquirer"
 import { touch } from "./touch"
-import { hasDocPath } from "./utils"
+import { hasDocLibraryPath } from "./utils"
 import { openFile } from "./open"
+import { updateCache } from "./cache"
+
+program.version("1.0.12", "-v, --version")
 
 program
   .command("list")
@@ -27,16 +30,22 @@ program
   .description("get|set|open")
   .action((args?: string[]) => {
     if (args) config(args)
+    return
   })
 
 program
   .command("del")
   .alias("d")
+  .option("-f,--force", "强行从文件夹删除")
   .argument("<tag>", "文档编号")
   .description("删除文档")
-  .action(async (index: string) => {
-    if (!hasDocPath()) {
+  .action(async (index: string, cmd) => {
+    if (!hasDocLibraryPath()) {
       return
+    }
+    let type = false
+    if (cmd.force) {
+      type = true
     }
 
     let ans = await inquirer.prompt([
@@ -47,7 +56,7 @@ program
         default: true,
       },
     ])
-    ans ? del(index) : null
+    ans ? del(index, type) : null
   })
 
 program
@@ -57,6 +66,7 @@ program
   .description("新建文档")
   .action((name) => {
     touch(name)
+    return
   })
 
 program
@@ -66,6 +76,15 @@ program
   .description("打开文档")
   .action((name) => {
     openFile(name)
+    return
+  })
+
+program
+  .command("cache")
+  .description("更新缓存")
+  .action(() => {
+    updateCache()
+    return
   })
 
 program.parse(process.argv)

@@ -10,6 +10,7 @@ enum Methods {
 }
 
 export const config = (args: string[]) => {
+  console.log("config")
   let m = args[0]
 
   if (!(Object.values(Methods) as string[]).includes(m)) {
@@ -41,6 +42,7 @@ export const config = (args: string[]) => {
             WriteWay.FIELD,
             "dir_path"
           )
+          echo(chalk.green("oooook!"))
           echo(
             chalk.grey(
               "tip:如果你想知道文档存放路径，可以执行mosa config get path"
