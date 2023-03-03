@@ -8,6 +8,7 @@ import { touch } from "./touch"
 import { hasDocLibraryPath } from "./utils"
 import { openFile } from "./open"
 import { updateCache } from "./cache"
+import { ReName } from "./rname"
 
 program.version("1.0.14", "-v, --version")
 
@@ -30,7 +31,6 @@ program
   .description("get|set|open")
   .action((args?: string[]) => {
     if (args) config(args)
-    return
   })
 
 program
@@ -66,7 +66,6 @@ program
   .description("新建文档")
   .action((name) => {
     touch(name)
-    return
   })
 
 program
@@ -76,7 +75,14 @@ program
   .description("打开文档")
   .action((name) => {
     openFile(name)
-    return
+  })
+program
+  .command("rname")
+  .alias("rna")
+  .description("修改文件名")
+  .argument("<args...>")
+  .action((args: string[]) => {
+    ReName(args)
   })
 
 program
@@ -84,7 +90,6 @@ program
   .description("更新缓存")
   .action(() => {
     updateCache()
-    return
   })
 
 program.parse(process.argv)

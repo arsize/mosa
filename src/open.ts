@@ -1,7 +1,7 @@
 import * as configJson from "./mconfig.json"
 import shell from "shelljs"
 import path from "path"
-import { getFiles, isId, writeTo, echo, fuzzyMatch } from "./utils"
+import { isId, writeTo, echo, fuzzyMatch } from "./utils"
 import { WriteWay } from "./constant"
 import chalk from "chalk"
 
