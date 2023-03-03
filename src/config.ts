@@ -2,6 +2,7 @@ import chalk from "chalk"
 import path from "path"
 import * as configJson from "./mconfig.json"
 import { WriteWay } from "./constant"
+import shell from "shelljs"
 import { checkPathExists, echo, writeTo } from "./utils"
 
 enum Methods {
@@ -50,6 +51,29 @@ export const config = (args: string[]) => {
         } catch (error) {
           // eslint-disable-next-line no-console
           console.log(error)
+        }
+      } else if (args.length > 1 && args[1].includes("git=")) {
+        if (shell.which("git")) {
+          const remote = args[1].split("git=")[1]
+          // const { dir_path } = configJson as Config
+          // shell.cd(dir_path)
+          // shell.exec(`git init`)
+          // shell.exec(`git remote add origin ${remote}`)
+          try {
+            writeTo(
+              path.join(__dirname, "./mconfig.json"),
+              remote,
+              WriteWay.FIELD,
+              "git"
+            )
+            echo(chalk.green("oooook!"))
+          } catch (error) {
+            // eslint-disable-next-line no-console
+            console.log(error)
+          }
+        } else {
+          echo(chalk.redBright("没有安装git，请先安装git之后再使用"))
+          return
         }
       }
       break

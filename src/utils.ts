@@ -93,6 +93,20 @@ export function hasDocLibraryPath(): boolean {
     return true
   }
 }
+/**
+ * 是否已设置git remote
+ * @returns
+ */
+export function hasGitPath(): boolean {
+  if (!configJson.git) {
+    echo(chalk.redBright("未设置git远程仓库"))
+    echo(chalk.gray("请先运行：mosa config set git=`远程git仓库地址`"))
+
+    return false
+  } else {
+    return true
+  }
+}
 
 /**
  * 模糊查询
