@@ -9,6 +9,8 @@ import { hasDocLibraryPath } from "./utils"
 import { openFile } from "./open"
 import { updateCache } from "./cache"
 import { ReName } from "./rname"
+import { push } from "./push"
+import { pull } from "./pull"
 
 program.version("1.0.15", "-v, --version")
 
@@ -90,6 +92,18 @@ program
   .description("更新缓存")
   .action(() => {
     updateCache()
+  })
+program
+  .command("push")
+  .description("推送git")
+  .action(() => {
+    push()
+  })
+program
+  .command("pull")
+  .description("拉取git")
+  .action(() => {
+    pull()
   })
 
 program.parse(process.argv)
