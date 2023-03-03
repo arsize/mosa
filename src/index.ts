@@ -10,7 +10,7 @@ import { openFile } from "./open"
 import { updateCache } from "./cache"
 import { ReName } from "./rname"
 
-program.version("1.0.14", "-v, --version")
+program.version("1.0.15", "-v, --version")
 
 program
   .command("list")
