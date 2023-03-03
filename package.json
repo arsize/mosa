@@ -9,7 +9,7 @@
   "scripts": {
     "start": "nodemon",
     "build": "ts-node-esm",
-    "lint": "eslint ./src --ext .ts",
+    "lint": "eslint ./src --ext .ts --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

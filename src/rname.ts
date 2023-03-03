@@ -11,8 +11,8 @@ export function ReName(args: string[]) {
     echo(chalk.gray("eg: mosa rname 0 newfile"))
     return
   }
-  let { files, dir_path } = configJson as Config
-  let tag = args[0]
+  const { files, dir_path } = configJson as Config
+  const tag = args[0]
   let newName = args[1]
 
   if (isId(newName)) {
@@ -21,7 +21,7 @@ export function ReName(args: string[]) {
   }
 
   if (isId(tag)) {
-    let index = parseInt(tag)
+    const index = parseInt(tag)
     if (newName == files[index].name) {
       echo(chalk.redBright("当前目录已存在该名称的文件"))
       return
@@ -31,7 +31,7 @@ export function ReName(args: string[]) {
       return
     }
     if (newName.indexOf(".") == -1) {
-      let ext = files[index].name.split(".")[1]
+      const ext = files[index].name.split(".")[1]
       newName = `${newName}.${ext}`
     }
 
@@ -57,7 +57,7 @@ export function ReName(args: string[]) {
       return
     }
     if (newName.indexOf(".") == -1) {
-      let ext = files[index].name.split(".")[1]
+      const ext = files[index].name.split(".")[1]
       newName = `${newName}.${ext}`
     }
     shell.cp("-R", files[index].path, path.join(dir_path, `/${newName}`))

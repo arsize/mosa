@@ -4,7 +4,7 @@ import chalk from "chalk"
 
 export function showFileList() {
   if (hasDocLibraryPath()) {
-    let filesCache = (configJson as Config).files
+    const filesCache = (configJson as Config).files
     if (filesCache.length > 0) {
       filesCache.map((k: CacheFileInfo, i: number) => {
         echo(`${chalk.gray(` [${i}] `)}${chalk.green(`${k.name}`)}`)

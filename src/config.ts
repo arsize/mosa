@@ -10,7 +10,7 @@ enum Methods {
 }
 
 export const config = (args: string[]) => {
-  let m = args[0]
+  const m = args[0]
 
   if (!(Object.values(Methods) as string[]).includes(m)) {
     echo(`${chalk.redBright("请输入正确的配置项")}`)
@@ -29,7 +29,7 @@ export const config = (args: string[]) => {
       break
     case Methods.SET:
       if (args.length > 1 && args[1].includes("path=")) {
-        let pa = args[1].split("path=")[1]
+        const pa = args[1].split("path=")[1]
         if (!checkPathExists(pa)) {
           echo(`${chalk.redBright("路径不正确，请确认")}`)
           return
@@ -48,6 +48,7 @@ export const config = (args: string[]) => {
             )
           )
         } catch (error) {
+          // eslint-disable-next-line no-console
           console.log(error)
         }
       }

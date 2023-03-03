@@ -5,9 +5,9 @@ import shell from "shelljs"
 import chalk from "chalk"
 
 export const del = (tag: string, type = false) => {
-  let config = configJson as Config
+  const config = configJson as Config
   if (isId(tag)) {
-    let index = parseInt(tag)
+    const index = parseInt(tag)
     if (index >= config.files.length) {
       echo(chalk.redBright("请输入正确的文件编号"))
       return

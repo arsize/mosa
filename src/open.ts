@@ -10,26 +10,25 @@ import chalk from "chalk"
  * @param tag
  */
 export function openFile(tag: string) {
-  let { open, files } = configJson as Config
+  const { open, files } = configJson as Config
 
   if (isId(tag)) {
-    let index = parseInt(tag)
+    const index = parseInt(tag)
     if (index >= files.length) {
       echo(chalk.redBright("请输入正确的文件编号"))
       return
     }
-    let _pth = files[index].path
+    const _pth = files[index].path
     _openWay(open, _pth)
   } else {
-    let iArr: number[]
-    iArr = fuzzyMatch(files, tag)
+    const iArr: number[] = fuzzyMatch(files, tag)
 
     if (iArr.length == 0) {
       echo(chalk.redBright("找不到该文件，请确认"))
       return
     }
     if (iArr.length == 1) {
-      let _pth = files[iArr[0]].path
+      const _pth = files[iArr[0]].path
       _openWay(open, _pth)
       return
     }

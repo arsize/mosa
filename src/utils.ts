@@ -8,6 +8,7 @@ import * as configJson from "./mconfig.json"
 export const mconfig = path.join(__dirname, "./mconfig.json")
 
 export const echo = (str: string) => {
+  // eslint-disable-next-line no-console
   console.log(str)
 }
 
@@ -23,10 +24,10 @@ export const isId = (str: string) => (/^[0-9]*$/.test(str) ? true : false)
  * @param _pth
  */
 export const getFiles = (_pth: string) => {
-  let pa = fs.readdirSync(_pth)
-  let _files: CacheFileInfo[] = []
+  const pa = fs.readdirSync(_pth)
+  const _files: CacheFileInfo[] = []
   pa.forEach((e) => {
-    let info = fs.statSync(path.join(_pth, e))
+    const info = fs.statSync(path.join(_pth, e))
     if (info.isDirectory()) {
       getFiles(path.join(_pth, e))
     } else {
@@ -64,12 +65,14 @@ export const writeTo = (
   field?: string
 ) => {
   if (way == WriteWay.ALL) {
+    // Todo
   } else if (way == WriteWay.APPEND) {
+    // Todo
   } else if (way == WriteWay.FIELD) {
     if (!field) {
       return new Error("未输入修改字段")
     }
-    let _temp = JSON.parse(fs.readFileSync(_pth, "utf8"))
+    const _temp = JSON.parse(fs.readFileSync(_pth, "utf8"))
     _temp[field] = content
     fs.writeFileSync(_pth, json.plain(_temp), "utf8")
   }

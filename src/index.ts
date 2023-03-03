@@ -48,7 +48,7 @@ program
       type = true
     }
 
-    let ans = await inquirer.prompt([
+    const ans = await inquirer.prompt([
       {
         type: "confirm",
         name: "isDel",

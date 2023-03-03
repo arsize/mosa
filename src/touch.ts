@@ -21,16 +21,16 @@ export function touch(name: string) {
     name = `${name}.md`
   }
 
-  let _pth = path.join(configJson.dir_path, `/${name}`)
+  const _pth = path.join(configJson.dir_path, `/${name}`)
 
-  let fileCache: CacheFileInfo = {
+  const fileCache: CacheFileInfo = {
     name: name,
     path: _pth,
     createTime: "",
     updateTime: "",
   }
 
-  let _temp = configJson as Config
+  const _temp = configJson as Config
   _temp.files.push(fileCache)
 
   writeTo(mconfig, _temp.files, WriteWay.FIELD, "files")
