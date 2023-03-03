@@ -2,7 +2,24 @@
 
 用于命令行的交互式备忘单工具.🪵
 
-tips:暂时主要只支持 mac，其他系统未测试
+tips:暂时主要只支持 mac，其他系统未测试，后续再支持
+
+### 解决什么问题
+
+1. 在任意终端目录下，能统一快速便捷的操作同一个文档库中的文件，省去了频繁 cd 和敲长长命令的流程
+2. 各平台命令不太一样，如 win 的 powershell，linux 的 bash 等，用 mosa 可以统一文件操作体验
+3. 文件查找过程不经过遍历，而是直接查本地缓存列表，优化了文档库查找文件速度
+4. mosa cat 命令不仅能直接在终端展示文件内容，还能根据文件名模糊查询，不记得具体文件名？它会提示你
+5. 不用脱离工作环境去打开其他备忘软件，vscode 用户直接 command + j 在终端快速查询
+
+### 后续功能
+
+- [ ] 多平台兼容
+- [ ] 对 git 多版本的处理
+- [ ] 更统一和友好的提示
+- [ ] open 命令对 vim，sublime 等软件的支持
+- [ ] 减少配置操作
+- [ ] 集成一些常用工具
 
 ### 安装
 
@@ -20,7 +37,12 @@ $ mosa config set path=/Users/arsize/Documents/doc
 ```
 
 ```shell
-$ mosa cache //会同步缓存文件和目录下真实文件
+$ mosa config get path
+//查看文档存放路径
+```
+
+```shell
+$ mosa cache //同步缓存记录和目录下真实文件
 oooook!
 
 ```
@@ -90,12 +112,12 @@ oooook!
 ```
 
 ```shell
-$ mosa rname 2 mysql命令 //也可用对应编号修改文件名
+$ mosa rna 2 mysql命令 //也可用对应编号修改文件名
 oooook!
 ```
 
 ```shell
-$ mosa open 2 //vscode 新窗口打开编号2的文件
+$ mosa open 2 //vscode 新窗口打开编号2的文件（暂时只支持vscode）
 oooook!
 ```
 
