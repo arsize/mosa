@@ -12,7 +12,7 @@ import { ReName } from "./rname"
 import { push } from "./push"
 import { pull } from "./pull"
 
-program.version("1.0.17", "-v, --version")
+program.version("1.0.18", "-v, --version")
 
 program
   .command("list")
