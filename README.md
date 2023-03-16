@@ -117,7 +117,7 @@ oooook!
 ```
 
 ```shell
-$ mosa open 2 //vscode 新窗口打开编号2的文件（暂时只支持vscode）
+$ mosa open 2 //vscode 新窗口打开编号2的文件（暂时只支持vscode，sublime）
 oooook!
 ```
 

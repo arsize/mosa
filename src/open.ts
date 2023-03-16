@@ -46,12 +46,23 @@ function _openWay(open: string, _pth: string) {
       case "vscode":
         shell.exec(`code ${path.join(_pth)}`)
         break
+      case "subl":
+        shell.exec(`subl ${path.join(_pth)}`)
+        break
 
       default:
         break
     }
   } else {
-    if (shell.which("code")) {
+    if (shell.which("subl")) {
+      writeTo(
+        path.join(__dirname, "./mconfig.json"),
+        "subl",
+        WriteWay.FIELD,
+        "open"
+      )
+      shell.exec(`subl ${path.join(_pth)}`)
+    } else if (shell.which("code")) {
       writeTo(
         path.join(__dirname, "./mconfig.json"),
         "vscode",
